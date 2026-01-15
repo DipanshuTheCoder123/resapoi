@@ -1,0 +1,29 @@
+class Solution {
+public: 
+     static int const mod=1000000000+7;
+      long long dp[4001][1001];
+
+              int   solve(int pos ,int target,int k ){
+                     if(k==0&&pos==target){
+                         return 1;
+                     }if(k==0){
+                         return 0;
+                     }
+                     if(dp[pos+1000][k]!=-1){
+                         return dp[pos+1000][k];
+                     }
+                    
+             dp[pos+1000][k] = (solve(pos-1,target,k-1)+solve(pos+1,target,k-1))%mod;   
+               return  dp[pos+1000][k];
+                    
+                }
+    
+    int numberOfWays(int startPos, int endPos, int k) {
+          for(int i=0;i<4001;i++){
+              for(int j=0;j<=k;j++){
+                  dp[i][j]=-1;
+              }
+          }      
+        return   solve(startPos,  endPos, k);
+    }
+};
